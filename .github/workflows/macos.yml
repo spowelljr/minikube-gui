@@ -1,0 +1,14 @@
+name: Build macOS
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - uses: jurplel/install-qt-action@v3
+      - name: build
+        run: |
+          qmake
+          make
+          ls
