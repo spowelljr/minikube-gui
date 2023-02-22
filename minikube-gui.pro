@@ -36,7 +36,7 @@ SOURCES       = src/main.cpp \
                 src/tray.cpp \
                 src/updater.cpp \
                 src/window.cpp
-RESOURCES     = minikube.qrc
+RESOURCES     = minikube-gui.qrc
 ICON          = resources/images/minikube.icns
 
 QT += widgets network

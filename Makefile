@@ -12,7 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-VERSION = 0.0.2
+.PHONY: build-linux
+build-linux:
+	qmake
+	make
+
+.PHONY: package-linux
+package-linux:
+	tar -czvf minikube-gui-linux.tar.gz ./minikube-gui
+
+.PHONY: build-macos
+build-macos:
+	qmake
+	make
+
+.PHONY: package-macos
+package-macos:
+	macdeployqt ./minikube-gui.app -qmldir=. -verbose=1 -dmg
+	mv ./minikube-gui.dmg ./minikube-gui-macos.dmg
+
+.PHONY: build-windows
+build-windows:
+	call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+	qmake
+	nmake
+
+.PHONY: package-windows
+package-windows:
+	& scripts\windows-publish.ps1 minikube-gui-windows minikube-gui.exe
+	Compress-Archive -Path minikube-gui-windows minikube-gui-windows.zip
 
 .PHONY: bump-version
 bump-version:
